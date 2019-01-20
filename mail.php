@@ -1,36 +1,17 @@
 <?php
-   if( $_GET["_subject"] && $_GET["_replyto"] && $_GET["message"] ) {
-	  
-	$subject = $_GET["_subject"];
-	$email = $_GET["_replyto"];
-	$msg = $_GET["message"];
-require 'PHPMailer-master/PHPMailerAutoload.php';
-   $mail = new PHPMailer();
-   $mail ->IsSmtp();
-   $mail ->SMTPDebug = 0;
-   $mail ->SMTPAuth = true; 
-   $mail ->SMTPSecure = 'ssl';
-   $mail ->Host = "smtp.gmail.com";
-   $mail ->Port = 465; // or 587
-   $mail ->IsHTML(true);
-   $mail ->Username = "sunnygorle1234@gmail.com";
-   $mail ->Password = "aezakmigta5";
-   $mail ->SetFrom($email);
-   $mail ->Subject = $subject;
-   $mail ->Body = $msg;
-   $mail ->AddAddress("sunnygorle1234@gmail.com");
+if(isset($_POST["submit"])) {
+$recipient = "sunnygorle1234@gmail.com"; //my email
+echo $subject = 'Email message from Point Plumbing';
 
-   if(!$mail->Send())
-   {
-       echo "Mail Not Sent";
+echo $email = $_POST["_replyto"];
+echo  $message = $_POST["message"];
+echo  $sub = $_POST["_subject"];
 
-   }
-   else
-   {
-       echo "Mail Sent";
-   }
+ $mailBody="Sub: $sub\nEmail: $email\n\n$message"; 
 
+ mail($recipient, $subject, $mailBody, "From: $name <$email>");
 
- }
+echo $thankYou="<p>Thank you! We will be in contact with you shortly.</p>";
+
+}
 ?>
-
